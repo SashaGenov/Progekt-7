@@ -15,8 +15,8 @@ import (
 // сгенерированных чисел.
 func Generator(ctx context.Context, ch chan<- int64, fn func(int64)) {
 	var i int64 = 1
+	defer close(ch)
 	for {
-		defer close(ch)
 		select {
 		case ch <- i:
 			fn(i)
